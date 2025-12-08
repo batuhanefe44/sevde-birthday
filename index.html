@@ -11,7 +11,7 @@
             overflow-x: hidden;
         }
 
-        /* Giriş Animasyonu */
+        /* Giriş animasyonu */
         #intro {
             position: fixed;
             top: 0; left: 0;
@@ -32,7 +32,7 @@
             100% { opacity: 0; visibility: hidden; }
         }
 
-        /* Ana Bölüm */
+        /* Ana bölüm */
         .section {
             height: 100vh;
             display: flex;
@@ -57,7 +57,7 @@
             text-shadow: 0 0 10px #b2e8b2, 0 0 20px #a0e0a0;
         }
 
-        /* Yağmur ve Konfeti Efektleri */
+        /* Emoji yağmuru ve konfeti */
         .drop {
             position: fixed;
             top: -50px;
@@ -68,7 +68,7 @@
 
         @keyframes fall {
             from { transform: translateY(-50px) rotate(0deg); }
-            to { transform: translateY(120vh) rotate(360deg); }
+            to   { transform: translateY(120vh) rotate(360deg); }
         }
 
         .confetti {
@@ -81,7 +81,9 @@
         }
 
         @keyframes confettiFall {
-            100% { transform: translateY(110vh) rotate(360deg); }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+            }
         }
 
         /* Butonlar */
@@ -97,78 +99,94 @@
             box-shadow: 0 8px 18px rgba(0,0,0,0.18);
             transition: 0.3s ease;
         }
+
         .pretty-btn:hover {
             transform: scale(1.08);
             box-shadow: 0 10px 25px rgba(0,0,0,0.25);
         }
+
         .pretty-btn.alt {
             background: linear-gradient(135deg, #2E7D32, #54C95A);
         }
 
-        /* Scroll İpucu Yazısı */
+        /* Scroll ipucu yazısı */
         .scroll-hint {
-            width: 100%;
-            text-align: center;
             position: fixed;
-            top: 25px;
-            left: 0;
-            font-size: 20px;
-            color: #2e8b57;
-            font-weight: 600;
-            opacity: 0; /* JS ile gösterilecek */
-            animation: pulseFade 3s infinite ease-in-out;
-            z-index: 900;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            color: rgba(46, 139, 87, 0.9);
+            padding: 6px 14px;
+            border-radius: 12px;
+            backdrop-filter: blur(6px);
+            background: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            animation: fadeInSoft 1.2s ease forwards;
+            z-index: 9999;
             pointer-events: none;
-            transition: opacity 0.5s ease;
+            letter-spacing: 0.5px;
+            transition: opacity .5s ease;
         }
 
-        @keyframes pulseFade {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(5px); }
-            100% { transform: translateY(0); }
+        @keyframes fadeInSoft {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
         }
 
-        /* Mesaj Alanı */
-        .messages-container {
+        /* Fotoğraf şeridi (Start Magic sonrası görünen kısım) */
+        .photo-strip {
+            margin-top: 40px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            padding: 50px 0;
-            transition: 0.5s;
-        }
-
-        .message {
-            font-size: 35px;
-            margin: 60px 0;
+            gap: 18px;
             opacity: 0;
             transform: translateY(40px);
-            transition: all 0.6s ease;
+            justify-content: center;
+            transition: opacity 1s ease, transform 1s ease;
+            flex-wrap: wrap;
+        }
+
+        .photo-strip.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .photo-strip img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+            animation: fadeSlide 7s ease-in-out infinite;
+        }
+
+        @keyframes fadeSlide {
+            0%   { opacity: 0; transform: translateX(-25px); }
+            20%  { opacity: 1; transform: translateX(0); }
+            80%  { opacity: 1; transform: translateX(25px); }
+            100% { opacity: 0; transform: translateX(0); }
+        }
+
+        /* Mesajlar */
+        .message {
+            font-size: 35px;
+            margin: 100px 0;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 0.8s;
             color: #2e8b57;
             text-align: center;
-            cursor: pointer;
-            position: relative;
         }
 
-        /* Scroll ile görünür olma */
-        .message.show {
+        .show {
             opacity: 1 !important;
             transform: translateY(0) !important;
-        }
-
-        /* Başlangıçta hepsi net olsun */
-        .message.dim {
-            filter: blur(5px);
-            opacity: 0.4;
-            transform: scale(0.95);
-        }
-
-        .message.active {
-            filter: blur(0);
-            opacity: 1;
-            transform: scale(1.25);
-            text-shadow: 0 0 15px rgba(46, 139, 87, 0.6);
-            z-index: 10;
         }
 
         .bottom-text {
@@ -176,43 +194,65 @@
             padding: 50px;
             font-size: 30px;
             color: #2e8b57;
-            transition: 0.5s;
         }
-
-        /* Bir mesaj aktifken alttaki notu da hafif silik yapalım */
-        .messages-container.has-active ~ .bottom-text {
-            filter: blur(3px);
-            opacity: 0.5;
-        }
-
     </style>
 </head>
 <body>
 
+    <!-- Üstte scroll ipucu -->
+    <div class="scroll-hint">aşağıya kaydırmak isteyebilirsin :))</div>
+
+    <!-- Giriş ekranı -->
     <div id="intro">🎉 Happy Birthday Sevde 🎉</div>
 
-    <!-- Baş harfleri büyük scroll ipucumuz -->
-    <div id="scrollHint" class="scroll-hint">Aşağıya Kaydırmak İsteyebilirsin :))</div>
-
+    <!-- Ana başlık bölümü -->
     <div class="section">
         <h1>Happy Birthday</h1>
         <div id="name" class="glow"></div>
 
-        <button class="pretty-btn" onclick="startRain()">Start Magic ✨</button>
+        <!-- Start Magic artık startMagic() çağırıyor -->
+        <button class="pretty-btn" onclick="startMagic()">Start Magic ✨</button>
         <button class="pretty-btn alt" onclick="startConfetti()">Confetti 🎊</button>
     </div>
 
-    <!-- Mesajları kapsayıcı içine aldık -->
-    <div class="messages-container">
-        <div class="message">🌿 You are amazing.</div>
-        <div class="message">🍃 Today is your special day.</div>
-        <div class="message">💚 Keep shining, Sevde!</div>
-        <div class="message">🌱 You are loved.</div>
+    <!-- Fotoğraf şeridi: BURAYA FOTOĞRAFLARINI KOY -->
+    <div class="photo-strip" id="photoStrip">
+        <!-- Fotoğraf dosya adlarını kendine göre değiştir -->
+        <img src="sevde1.jpg" alt="Sevde 1">
+        <img src="sevde2.jpg" alt="Sevde 2">
+        <img src="sevde3.jpg" alt="Sevde 3">
+        <!-- İstersen aşağıya aynı satırı çoğaltarak daha fazla ekleyebilirsin -->
+        <!-- <img src="sevde4.jpg" alt="Sevde 4"> -->
     </div>
+
+    <!-- Mesajlar -->
+    <div class="message">🌿 You are amazing.</div>
+    <div class="message">🍃 Today is your special day.</div>
+    <div class="message">💚 Keep shining, Sevde!</div>
+    <div class="message">🌱 You are loved.</div>
 
     <div class="bottom-text">✨ Unutma Sevde: İstediğin her şeyi başarabilirsin. Işığın hep parlasın. ✨</div>
 
     <script>
+        // Scroll ipucu yazısı (kaydırınca kaybolsun, sonra yukarı çıkınca geri gelsin, 6 sn sonra da kendiliğinden sönsün)
+        document.addEventListener('DOMContentLoaded', () => {
+            const hint = document.querySelector('.scroll-hint');
+
+            if (hint) {
+                const updateHint = () => {
+                    if (window.scrollY > 10) {
+                        hint.style.opacity = '0';
+                    } else {
+                        hint.style.opacity = '1';
+                    }
+                };
+
+                window.addEventListener('scroll', updateHint);
+                setTimeout(() => { hint.style.opacity = '0'; }, 6000);
+            }
+        });
+
+        // İsmin harf harf çıkması
         const nameText = "Sevde 💚";
         let index = 0;
         function typeName() {
@@ -224,12 +264,7 @@
         }
         setTimeout(typeName, 2000);
 
-        // İpucu yazısının başlangıçta görünmesi için (Intro bittikten sonra)
-        setTimeout(() => {
-            const hint = document.getElementById("scrollHint");
-            if (window.scrollY < 50) hint.style.opacity = "1";
-        }, 2600);
-
+        // Emoji yağmuru
         const emojis = ["🌿", "🍃", "✨", "🪴"]; 
         function startRain() {
             setInterval(() => {
@@ -244,6 +279,7 @@
             }, 200);
         }
 
+        // Konfeti
         function startConfetti() {
             for (let i = 0; i < 80; i++) {
                 const c = document.createElement("div");
@@ -255,19 +291,9 @@
             }
         }
 
+        // Mesajları scroll ile göster
         const msgs = document.querySelectorAll(".message");
-        const scrollHint = document.getElementById("scrollHint");
-        const container = document.querySelector(".messages-container");
-
-        // Scroll ipucunu kaydırınca gizle/göster
         window.addEventListener("scroll", () => {
-            if (window.scrollY > 50) {
-                scrollHint.style.opacity = "0";
-            } else {
-                scrollHint.style.opacity = "1";
-            }
-
-            // Mesajların görünürlük ayarı
             msgs.forEach(msg => {
                 const pos = msg.getBoundingClientRect().top;
                 if (pos < window.innerHeight - 100) {
@@ -276,30 +302,13 @@
             });
         });
 
-        // Hover ile sadece bir mesaj net, diğerleri blur
-        if (container) {
-            container.addEventListener("mouseover", (e) => {
-                const targetMsg = e.target.closest(".message");
-                if (!targetMsg) return;
-
-                container.classList.add("has-active");
-                msgs.forEach(m => {
-                    if (m === targetMsg) {
-                        m.classList.remove("dim");
-                        m.classList.add("active");
-                    } else {
-                        m.classList.remove("active");
-                        m.classList.add("dim");
-                    }
-                });
-            });
-
-            container.addEventListener("mouseleave", () => {
-                container.classList.remove("has-active");
-                msgs.forEach(m => {
-                    m.classList.remove("dim", "active");
-                });
-            });
+        // ✨ Start Magic: emoji yağmuru + fotoğraf şeridini göster
+        function startMagic() {
+            startRain();  // istersen bunu silip sadece fotoğraf şovu bırakabilirsin
+            const strip = document.getElementById("photoStrip");
+            if (strip) {
+                strip.classList.add("show");
+            }
         }
     </script>
 
