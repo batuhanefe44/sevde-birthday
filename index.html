@@ -158,20 +158,51 @@
         }
 
         .photo-strip img {
-            width: 160px;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-            animation: fadeSlide 7s ease-in-out infinite;
-        }
+    width: 200px;      /* biraz daha büyük */
+    height: 200px;
+    object-fit: cover;
+    border-radius: 22px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+    opacity: 0;
+    animation: carousel 10s ease-in-out infinite;
+}
 
-        @keyframes fadeSlide {
-            0%   { opacity: 0; transform: translateX(-25px); }
-            20%  { opacity: 1; transform: translateX(0); }
-            80%  { opacity: 1; transform: translateX(25px); }
-            100% { opacity: 0; transform: translateX(0); }
-        }
+/* Her fotoğraf sırayla “öne çıkacak” */
+.photo-strip img:nth-child(1) { animation-delay: 0s; }
+.photo-strip img:nth-child(2) { animation-delay: 1s; }
+.photo-strip img:nth-child(3) { animation-delay: 2s; }
+.photo-strip img:nth-child(4) { animation-delay: 3s; }
+.photo-strip img:nth-child(5) { animation-delay: 4s; }
+.photo-strip img:nth-child(6) { animation-delay: 5s; }
+.photo-strip img:nth-child(7) { animation-delay: 6s; }
+.photo-strip img:nth-child(8) { animation-delay: 7s; }
+.photo-strip img:nth-child(9) { animation-delay: 8s; }
+.photo-strip img:nth-child(10) { animation-delay: 9s; }
+.photo-strip img:nth-child(11) { animation-delay: 10s; }
+
+       @keyframes carousel {
+    0% {
+        opacity: 0;
+        transform: translateX(-40px) scale(0.9);
+    }
+    10% {
+        opacity: 1;
+        transform: translateX(0) scale(1.15);
+    }
+    30% {
+        opacity: 1;
+        transform: translateX(25px) scale(1.15);
+    }
+    40% {
+        opacity: 0.7;
+        transform: translateX(0) scale(1.0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-40px) scale(0.9);
+    }
+}
+
 
         /* Mesajlar */
         .message {
