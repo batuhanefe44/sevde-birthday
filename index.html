@@ -3,212 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <title>Happy Birthday Sevde</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: "Poppins", sans-serif;
-            background: #e9ffe9;
-            overflow-x: hidden;
-            text-align: center;
-        }
 
-        #intro {
-            position: fixed;
-            inset: 0;
-            background: #c8f7c5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 40px;
-            color: #2e8b57;
-            z-index: 999;
-            animation: hideIntro 2.5s ease forwards;
-        }
-        @keyframes hideIntro { 100% { opacity: 0; visibility: hidden; } }
-
-        .main {
-            padding-top: 50px;
-        }
-
-        h1 {
-            font-size: 52px;
-            color: #2e8b57;
-        }
-
-        #name {
-            font-size: 40px;
-            color: #4caf50;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #4CAF50, #74df74);
-            color: #fff;
-            padding: 14px 36px;
-            font-size: 22px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            transition: .3s;
-        }
-        .btn:hover { transform: scale(1.1); }
-
-        /* ─── Çift Şerit ─── */
-        .double-strip {
-            width: 100%;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 55px;
-            margin-top: 60px;
-        }
-        .film-track {
-            display: flex;
-            gap: 14px;
-            animation: track 42s linear infinite;
-        }
-        .top-track { animation-direction: normal; }
-        .bottom-track { animation-direction: reverse; }
-
-        @keyframes track {
-            100% { transform: translateX(-65%); }
-        }
-
-        .film-track img {
-            height: 240px;
-            width: auto;
-            max-width: 200px;
-            object-fit: cover;
-            border-radius: 18px;
-            transform: perspective(900px) rotateY(-4deg);
-            animation: tilt 6s ease-in-out infinite alternate;
-            box-shadow: 0 14px 30px rgba(0,0,0,0.25);
-            transition: .4s;
-            position: relative;
-            background: #fff;
-        }
-        .film-track img:hover {
-            transform: perspective(900px) rotateY(8deg) scale(1.1);
-        }
-        @keyframes tilt {
-            0% { transform: perspective(900px) rotateY(-6deg); }
-            100% { transform: perspective(900px) rotateY(6deg); }
-        }
-
-        .film-track img::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.5) 50%, transparent 100%);
-            transform: skewX(-25deg);
-            animation: shine 8s infinite;
-        }
-        @keyframes shine {
-            0% { transform: translateX(-150%) skewX(-25deg); }
-            100% { transform: translateX(150%) skewX(-25deg); }
-        }
-
-        .center-messages {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-        .msg {
-            font-size: 32px;
-            color: #2e8b57;
-            opacity: 0;
-            transition: .7s;
-            transform: translateY(30px);
-        }
-        .msg.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .bottom-text {
-            font-size: 26px;
-            color: #2e8b57;
-            margin: 75px 0;
-        }
-
-        /* Emoji yağmuru */
-        .drop {
-            position: fixed;
-            top: -50px;
-            font-size: 30px;
-            animation: fall 4s linear infinite;
-            pointer-events:none;
-        }
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); }
-        }
-
-        @media(max-width:768px) {
-            h1 { font-size: 44px; }
-            .film-track img { height: 200px; }
-            .msg { font-size: 26px; }
-        }
-        .music-btn {
-            position: fixed;
-            top: 22px;
-            right: 22px;
-            font-size: 26px;
-            background: rgba(255,255,255,0.65);
-            backdrop-filter: blur(6px);
-            border: none;
-            border-radius: 50%;
-            width: 55px;
-            height: 55px;
-            cursor: pointer;
-            display: none; /* startMagic'e kadar gizli */
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-            transition: .3s;
-            z-index: 9999;
-        }        
-
-.music-btn:hover {
-    transform: scale(1.15);
-    background: rgba(255,255,255,0.85);
+<style>
+body {
+    margin:0;
+    font-family: "Poppins", sans-serif;
+    background:#e9ffe9;
+    overflow-x:hidden;
+    text-align:center;
 }
 
-    </style>
+/* Intro */
+#intro {
+    position:fixed;
+    inset:0;
+    background:#c8f7c5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:40px;
+    color:#2e8b57;
+    z-index:999;
+    animation:hideIntro 2.5s ease forwards;
+}
+@keyframes hideIntro {100%{opacity:0;visibility:hidden;}}
+
+/* Header */
+h1 {
+    font-size:54px;
+    color:#2e8b57;
+    margin-top:60px;
+}
+#name {
+    font-size:42px;
+    color:#4caf50;
+    margin:5px 0 25px;
+    letter-spacing:3px;
+}
+.btn {
+    background:linear-gradient(135deg,#4CAF50,#77e677);
+    color:white;
+    padding:14px 36px;
+    border-radius:50px;
+    border:none;
+    font-size:22px;
+    cursor:pointer;
+    transition:.3s;
+}
+.btn:hover {transform:scale(1.1);}
+
+/* Double Strip Wrapper */
+.double-strip {
+    width:100%;
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    gap:60px;
+    margin-top:70px;
+}
+
+/* Film Strips */
+.film-track {
+    display:flex;
+    gap:14px;
+    animation:scrollLoop 48s linear infinite;
+}
+.top-track {animation-direction:normal;}
+.bottom-track {animation-direction:reverse;}
+@keyframes scrollLoop {100%{transform:translateX(-50%);}}
+
+/* Film Photo Style */
+.film-track img {
+    height:240px;
+    max-width:200px;
+    object-fit:cover;
+    border-radius:18px;
+    box-shadow:0 16px 34px rgba(0,0,0,0.28);
+    transform:perspective(900px) rotateY(-4deg);
+    animation:tilt 6s ease-in-out infinite alternate;
+    transition:.4s;
+    background:#fff;
+    position:relative;
+}
+.film-track img:hover {
+    transform:perspective(900px) rotateY(8deg) scale(1.08);
+}
+
+/* 3D tilt */
+@keyframes tilt {
+    0% {transform:perspective(900px) rotateY(-6deg);}
+    100% {transform:perspective(900px) rotateY(6deg);}
+}
+
+/* Shine Effect */
+.film-track img::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.55) 50%,transparent 100%);
+    transform:skewX(-25deg);
+    animation:shine 9s infinite;
+}
+@keyframes shine {
+    0%{transform:translateX(-150%) skewX(-25deg);}
+    100%{transform:translateX(150%) skewX(-25deg);}
+}
+
+/* Twinkle star */
+.film-track img::before {
+    content:"✨";
+    position:absolute;
+    top:-14px;
+    right:-14px;
+    font-size:22px;
+    opacity:0;
+    animation:twinkle 5s infinite ease-in-out;
+}
+@keyframes twinkle {
+    0%,60%{opacity:0;transform:scale(.4);}
+    80%{opacity:1;transform:scale(1.3);}
+    100%{opacity:0;transform:scale(.4);}
+}
+
+/* Messages */
+.msg {
+    font-size:32px;
+    color:#2e8b57;
+    opacity:0;
+    transform:translateY(30px);
+    transition:.7s;
+    font-weight:600;
+}
+.msg.show {
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* Bottom text */
+.bottom-text {
+    font-size:26px;
+    color:#2e8b57;
+    margin:80px 0;
+}
+
+/* Music control button */
+.music-btn {
+    position:fixed;
+    top:20px;
+    right:20px;
+    width:55px;
+    height:55px;
+    font-size:26px;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    background:rgba(255,255,255,.7);
+    backdrop-filter:blur(6px);
+    box-shadow:0 8px 18px rgba(0,0,0,0.25);
+    transition:.3s;
+    z-index:9999;
+}
+.music-btn:hover {transform:scale(1.15);}
+
+/* Emoji Rain */
+.drop {
+    position:fixed;
+    top:-50px;
+    font-size:30px;
+    animation:fall 4s linear infinite;
+    pointer-events:none;
+}
+@keyframes fall {
+    to{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* Mobile */
+@media(max-width:768px){
+    h1{font-size:42px;}
+    #name{font-size:34px;}
+    .film-track img{height:200px;}
+    .msg{font-size:26px;}
+}
+</style>
 </head>
+
 <body>
 
 <div id="intro">🎉 Happy Birthday Sevde 🎉</div>
 
-<div class="main">
-    <h1>Happy Birthday</h1>
-    <div id="name"></div>
-    <button class="btn" onclick="startMagic()">Start Magic ✨</button>
-</div>
+<h1>Happy Birthday</h1>
+<div id="name"></div>
+<button class="btn" onclick="startMagic()">Start Magic ✨</button>
 
 <audio id="music" loop>
     <source src="happy-birthday.mp3" type="audio/mpeg">
 </audio>
 <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🔊</button>
 
-
+<!-- DOUBLE STRIP -->
 <div class="double-strip" id="strip">
 
+    <!-- TOP STRIP x2 -->
     <div class="film-track top-track">
-        <img src="sevde.jpg">
-        <img src="sevde1.jpg">
-        <img src="sevde2.jpg">
-        <img src="sevde3.jpg">
-        <img src="sevde4.jpg">
-        <img src="sevde5.jpg">
-        <img src="sevde6.jpg">
-        <img src="sevde7.jpg">
-        <img src="sevde8.jpg">
-        <img src="sevde9.jpg">
-        <img src="sevde10.jpg">
-        <img src="sevde11.jpg">
-        <img src="sevde12.jpg">
+        <!-- first 13 -->
+        <img src="sevde.jpg"><img src="sevde1.jpg"><img src="sevde2.jpg"><img src="sevde3.jpg"><img src="sevde4.jpg"><img src="sevde5.jpg"><img src="sevde6.jpg"><img src="sevde7.jpg"><img src="sevde8.jpg"><img src="sevde9.jpg"><img src="sevde10.jpg"><img src="sevde11.jpg"><img src="sevde12.jpg">
+        <!-- repeated 13 -->
+        <img src="sevde.jpg"><img src="sevde1.jpg"><img src="sevde2.jpg"><img src="sevde3.jpg"><img src="sevde4.jpg"><img src="sevde5.jpg"><img src="sevde6.jpg"><img src="sevde7.jpg"><img src="sevde8.jpg"><img src="sevde9.jpg"><img src="sevde10.jpg"><img src="sevde11.jpg"><img src="sevde12.jpg">
     </div>
 
+    <!-- MESSAGES -->
     <div class="center-messages">
         <p class="msg">🌿 You are amazing.</p>
         <p class="msg">✨ Today is your day.</p>
@@ -216,91 +222,77 @@
         <p class="msg">🍃 You are loved.</p>
     </div>
 
+    <!-- BOTTOM STRIP x2 -->
     <div class="film-track bottom-track">
-        <img src="sevde13.jpg">
-        <img src="sevde14.jpg">
-        <img src="sevde15.jpg">
-        <img src="sevde16.jpg">
-        <img src="sevde17.jpg">
-        <img src="sevde18.jpg">
-        <img src="sevde19.jpg">
-        <img src="sevde20.jpg">
-        <img src="sevde21.jpg">
-        <img src="sevde22.jpg">
-        <img src="sevde23.jpg">
-        <img src="sevde24.jpg">
-        <img src="sevde25.jpg">
+        <!-- next 13 -->
+        <img src="sevde13.jpg"><img src="sevde14.jpg"><img src="sevde15.jpg"><img src="sevde16.jpg"><img src="sevde17.jpg"><img src="sevde18.jpg"><img src="sevde19.jpg"><img src="sevde20.jpg"><img src="sevde21.jpg"><img src="sevde22.jpg"><img src="sevde23.jpg"><img src="sevde24.jpg"><img src="sevde25.jpg">
+        <!-- repeated -->
+        <img src="sevde13.jpg"><img src="sevde14.jpg"><img src="sevde15.jpg"><img src="sevde16.jpg"><img src="sevde17.jpg"><img src="sevde18.jpg"><img src="sevde19.jpg"><img src="sevde20.jpg"><img src="sevde21.jpg"><img src="sevde22.jpg"><img src="sevde23.jpg"><img src="sevde24.jpg"><img src="sevde25.jpg">
     </div>
-
 </div>
 
 <div class="bottom-text">✨ İyi ki doğdun Sevde ✨</div>
 
 <script>
-    // Yazı animasyonu
-    let t = "Sevde 💚", i = 0;
-    function writeName(){
-        if(i < t.length){
-            document.getElementById("name").innerHTML += t[i++];
-            setTimeout(writeName, 140);
-        }
+// Name typing
+let nameText="Sevde 💚", i=0;
+function type(){
+    if(i<nameText.length){
+        document.getElementById("name").innerText+=nameText[i++];
+        setTimeout(type,140);
     }
-    setTimeout(writeName, 1700);
+}
+setTimeout(type,1600);
 
-   function startMagic() {
-    document.getElementById("strip").style.display = "flex";
+// Start Magic
+function startMagic(){
+    document.getElementById("strip").style.display="flex";
     document.getElementById("music").play();
-    document.getElementById("musicBtn").style.display = "flex"; // ✨ MÜZİK BUTONU GÖRÜNSÜN
-    startRain();
-    startConfetti();
+    document.getElementById("musicBtn").style.display="flex";
+    startRain();startConfetti();
 }
 
+// Music Toggle
+function toggleMusic(){
+    const music=document.getElementById("music");
+    const btn=document.getElementById("musicBtn");
+    if(music.paused){music.play();btn.innerHTML="🔊";}
+    else{music.pause();btn.innerHTML="🔈";}
+}
 
-    const emojis = ["🌿","🍃","✨","🌱"];
-    function startRain(){
-        setInterval(()=>{
-            let e=document.createElement("div");
-            e.className="drop";
-            e.innerHTML=emojis[Math.random()*emojis.length|0];
-            e.style.left=Math.random()*innerWidth+"px";
-            e.style.fontSize=20+Math.random()*20+"px";
-            document.body.appendChild(e);
-            setTimeout(()=>e.remove(),4000);
-        },200);
-    }
+// Emoji Rain
+const emojis=["🌿","🍃","✨","🌱"];
+function startRain(){
+    setInterval(()=>{
+        let e=document.createElement("div");
+        e.className="drop";
+        e.innerHTML=emojis[Math.random()*emojis.length|0];
+        e.style.left=Math.random()*innerWidth+"px";
+        document.body.appendChild(e);
+        setTimeout(()=>e.remove(),4000);
+    },200);
+}
 
-    function startConfetti(){
-        for(let j=0;j<90;j++){
-            let d=document.createElement("div");
-            d.className="drop";
-            d.innerHTML="🎊";
-            d.style.left=Math.random()*innerWidth+"px";
-            d.style.fontSize="22px";
-            document.body.appendChild(d);
-            setTimeout(()=>d.remove(),3000);
-        }
-    }
-
-    const messages=document.querySelectorAll(".msg");
-    window.addEventListener("scroll",()=>{
-        messages.forEach(m=>{
-            if(m.getBoundingClientRect().top < innerHeight - 100)
-                m.classList.add("show")
-        })
-    });
-    function toggleMusic() {
-    const music = document.getElementById("music");
-    const btn = document.getElementById("musicBtn");
-
-    if (music.paused) {
-        music.play();
-        btn.innerHTML = "🔊";
-    } else {
-        music.pause();
-        btn.innerHTML = "🔈";
+// Confetti
+function startConfetti(){
+    for(let j=0;j<90;j++){
+        let d=document.createElement("div");
+        d.className="drop";
+        d.innerHTML="🎊";
+        d.style.left=Math.random()*innerWidth+"px";
+        document.body.appendChild(d);
+        setTimeout(()=>d.remove(),3500);
     }
 }
 
+// Show messages on scroll
+const msgs=document.querySelectorAll(".msg");
+window.addEventListener("scroll",()=>{
+    msgs.forEach(m=>{
+        if(m.getBoundingClientRect().top<innerHeight-120)
+            m.classList.add("show");
+    })
+});
 </script>
 
 </body>
