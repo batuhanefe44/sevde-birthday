@@ -140,46 +140,102 @@
             }
         }
 
-        /* 🎞️ Film Şeridi (Start Magic’ten sonra görünen kısmı) */
-        .film-strip-wrapper {
-            width: 100%;
-            overflow: hidden;
-            margin-top: 35px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
+      /* Film Şeridi */
+.film-strip-wrapper {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 35px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
 
-        .film-strip-wrapper.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+.film-strip-wrapper.show {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-        .film-strip {
-            width: 200%;
-        }
+.film-track {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    animation: filmScroll 45s linear infinite; /* 45 saniye yaptım daha akıcı olsun diye */
+}
 
-        .film-track {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-            animation: filmScroll 35s linear infinite;
-        }
+.film-track img {
+    height: 260px;
+    width: auto;
+    max-width: 220px;
+    object-fit: cover;
+    border-radius: 18px;
+    position: relative;
+    background: #fff;
+    transform: perspective(900px) rotateY(-2deg) scale(1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    animation: tilt 6s ease-in-out infinite alternate;
+    
+    /* Sinema loş gölgesi */
+    box-shadow: 0 12px 28px rgba(0,0,0,0.32);
+}
 
-        @keyframes filmScroll {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+/* Hover → daha güçlü 3D + parlama */
+.film-track img:hover {
+    transform: perspective(900px) rotateY(8deg) scale(1.08);
+    box-shadow: 0 20px 38px rgba(0,0,0,0.45);
+}
 
-        .film-track img {
-            height: 260px;          /* Dikey fotoğraflar için orta boy */
-            width: auto;            /* Oranını korusun */
-            max-width: 220px;
-            object-fit: cover;
-            border-radius: 18px;
-            box-shadow: 0 10px 22px rgba(0,0,0,0.22);
-            background: #fff;
-        }
+/* Hafif sağ-sol 3D sallanma */
+@keyframes tilt {
+    0% {
+        transform: perspective(900px) rotateY(-6deg) scale(1);
+    }
+    100% {
+        transform: perspective(900px) rotateY(6deg) scale(1);
+    }
+}
+
+/* Parlak efekt */
+.film-track img::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 220%;
+    height: 100%;
+    background: linear-gradient(120deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.4) 50%,
+        rgba(255,255,255,0) 100%
+    );
+    transform: skewX(-25deg);
+    animation: shine 7s infinite;
+}
+
+/* Parlak animasyon */
+@keyframes shine {
+    0% { left: -200%; }
+    100% { left: 200%; }
+}
+
+/* Yıldız ışıltıları */
+.film-track img::before {
+    content: "✨";
+    position: absolute;
+    font-size: 22px;
+    top: -12px;
+    right: -12px;
+    opacity: 0;
+    animation: twinkle 5s infinite ease-in-out;
+}
+
+/* Twinkle */
+@keyframes twinkle {
+    0%, 60% { opacity: 0; transform: scale(0.4) rotate(0deg); }
+    80%    { opacity: 1; transform: scale(1.2) rotate(20deg); }
+    100%   { opacity: 0; transform: scale(0.4) rotate(0deg); }
+}
+
+
 
         /* Mesajlar */
         .message {
