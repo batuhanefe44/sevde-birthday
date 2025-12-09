@@ -9,9 +9,9 @@
             font-family: "Poppins", sans-serif;
             background: #e9ffe9;
             overflow-x: hidden;
+            text-align: center;
         }
 
-        /* Giriş Animasyonu */
         #intro {
             position: fixed;
             top: 0; left: 0;
@@ -23,70 +23,30 @@
             font-size: 40px;
             color: #2e8b57;
             z-index: 999;
-            animation: fadeOut 2.5s ease forwards;
+            animation: hideIntro 2.5s ease forwards;
         }
 
-        @keyframes fadeOut {
-            0% { opacity: 1; }
-            60% { opacity: 1; }
+        @keyframes hideIntro {
+            0%, 60% { opacity: 1; }
             100% { opacity: 0; visibility: hidden; }
         }
 
-        /* Ana Bölüm */
-        .section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding-top: 40px;
+        .main {
+            padding-top: 50px;
         }
 
         h1 {
-            font-size: 60px;
+            font-size: 54px;
             color: #2e8b57;
-            margin-bottom: 10px;
         }
 
         #name {
-            font-size: 50px;
-            color: #4caf50;
-            margin-top: 10px;
+            font-size: 40px;
             letter-spacing: 3px;
+            color: #4caf50;
+            margin-bottom: 20px;
         }
 
-        .glow {
-            text-shadow: 0 0 10px #b2e8b2, 0 0 20px #a0e0a0;
-        }
-
-        /* Emoji Yağmuru ve Konfeti */
-        .drop {
-            position: fixed;
-            top: -50px;
-            font-size: 30px;
-            animation: fall linear infinite;
-            z-index: 10;
-        }
-
-        @keyframes fall {
-            from { transform: translateY(-50px) rotate(0deg); }
-            to   { transform: translateY(120vh) rotate(360deg); }
-        }
-
-        .confetti {
-            width: 8px;
-            height: 14px;
-            background-color: #2e8b57;
-            position: fixed;
-            top: -20px;
-            animation: confettiFall 2s linear forwards;
-        }
-
-        @keyframes confettiFall {
-            100% { transform: translateY(110vh) rotate(360deg); }
-        }
-
-        /* Butonlar */
         .pretty-btn {
             background: linear-gradient(135deg, #4CAF50, #6EDC6E);
             color: white;
@@ -95,351 +55,168 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            margin-top: 22px;
+            margin-top: 15px;
             box-shadow: 0 8px 18px rgba(0,0,0,0.18);
             transition: 0.3s ease;
         }
 
         .pretty-btn:hover {
-            transform: scale(1.08);
+            transform: scale(1.09);
+        }
+
+        /* Çift şerit */
+        .double-strip {
+            width: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 35px;
+            margin-top: 60px;
+        }
+
+        .film-track {
+            display: flex;
+            gap: 14px;
+            animation: scroll 40s linear infinite;
+        }
+
+        .top-track {
+            animation-direction: normal;
+        }
+
+        .bottom-track {
+            animation-direction: reverse;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-60%); }
+        }
+
+        .film-track img {
+            height: 240px;
+            border-radius: 18px;
+            object-fit: cover;
             box-shadow: 0 10px 25px rgba(0,0,0,0.25);
         }
 
-        .pretty-btn.alt {
-            background: linear-gradient(135deg, #2E7D32, #54C95A);
-        }
-
-        /* Scroll ipucu yazısı */
-        .scroll-hint {
-            position: fixed;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 18px;
-            color: rgba(46, 139, 87, 0.9);
-            padding: 6px 14px;
-            border-radius: 12px;
-            backdrop-filter: blur(6px);
-            background: rgba(255, 255, 255, 0.35);
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            animation: fadeInSoft 1.2s ease forwards;
-            z-index: 9999;
-            pointer-events: none;
-            letter-spacing: 0.5px;
-            transition: opacity .5s ease;
-        }
-
-        @keyframes fadeInSoft {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-
-      /* Film Şeridi */
-.film-strip-wrapper {
-    width: 100%;
-    overflow: hidden;
-    margin-top: 35px;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.film-strip-wrapper.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.film-track {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    animation: filmScroll 45s linear infinite; /* 45 saniye yaptım daha akıcı olsun diye */
-}
-
-.film-track img {
-    height: 260px;
-    width: auto;
-    max-width: 220px;
-    object-fit: cover;
-    border-radius: 18px;
-    position: relative;
-    background: #fff;
-    transform: perspective(900px) rotateY(-2deg) scale(1);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    animation: tilt 6s ease-in-out infinite alternate;
-    
-    /* Sinema loş gölgesi */
-    box-shadow: 0 12px 28px rgba(0,0,0,0.32);
-}
-
-/* Hover → daha güçlü 3D + parlama */
-.film-track img:hover {
-    transform: perspective(900px) rotateY(8deg) scale(1.08);
-    box-shadow: 0 20px 38px rgba(0,0,0,0.45);
-}
-
-/* Hafif sağ-sol 3D sallanma */
-@keyframes tilt {
-    0% {
-        transform: perspective(900px) rotateY(-6deg) scale(1);
-    }
-    100% {
-        transform: perspective(900px) rotateY(6deg) scale(1);
-    }
-}
-
-/* Parlak efekt */
-.film-track img::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 220%;
-    height: 100%;
-    background: linear-gradient(120deg,
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0.4) 50%,
-        rgba(255,255,255,0) 100%
-    );
-    transform: skewX(-25deg);
-    animation: shine 7s infinite;
-}
-
-/* Parlak animasyon */
-@keyframes shine {
-    0% { left: -200%; }
-    100% { left: 200%; }
-}
-
-/* Yıldız ışıltıları */
-.film-track img::before {
-    content: "✨";
-    position: absolute;
-    font-size: 22px;
-    top: -12px;
-    right: -12px;
-    opacity: 0;
-    animation: twinkle 5s infinite ease-in-out;
-}
-
-/* Twinkle */
-@keyframes twinkle {
-    0%, 60% { opacity: 0; transform: scale(0.4) rotate(0deg); }
-    80%    { opacity: 1; transform: scale(1.2) rotate(20deg); }
-    100%   { opacity: 0; transform: scale(0.4) rotate(0deg); }
-}
-
-
-
         /* Mesajlar */
-        .message {
-            font-size: 35px;
-            margin: 100px 0;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: 0.8s;
+        .center-messages .msg {
+            font-size: 32px;
             color: #2e8b57;
-            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.7s;
+            font-weight: 600;
         }
 
-        .show {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
+        .center-messages .msg.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .bottom-text {
-            text-align: center;
-            padding: 50px;
-            font-size: 30px;
+            font-size: 26px;
             color: #2e8b57;
+            margin: 80px 0;
         }
 
         @media (max-width: 768px) {
             h1 { font-size: 42px; }
-            #name { font-size: 36px; }
-            .film-track img {
-                height: 220px;
-                max-width: 180px;
-            }
-            .message { font-size: 26px; margin: 70px 0; }
-            .bottom-text { font-size: 24px; padding: 40px 20px; }
+            #name { font-size: 34px; }
+            .film-track img { height: 200px; }
+            .center-messages .msg { font-size: 28px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Üstte scroll ipucu -->
-    <div class="scroll-hint">aşağıya kaydırmak isteyebilirsin :))</div>
-
-    <!-- Giriş ekranı -->
     <div id="intro">🎉 Happy Birthday Sevde 🎉</div>
 
-    <!-- Ana başlık bölümü -->
-    <div class="section">
+    <div class="main">
         <h1>Happy Birthday</h1>
-        <div id="name" class="glow"></div>
-
-        <!-- Start Magic → Film şeridi + emoji -->
+        <div id="name"></div>
         <button class="pretty-btn" onclick="startMagic()">Start Magic ✨</button>
-        <button class="pretty-btn alt" onclick="startConfetti()">Confetti 🎊</button>
-
-        <!-- 🎞️ Film Şeridi (Start Magic’ten sonra görünür olacak) -->
-        <div class="film-strip-wrapper" id="filmStripWrapper">
-            <div class="film-strip">
-                <div class="film-track">
-                    <!-- 26 FOTOĞRAF – DOSYA İSİMLERİNİ KENDİNE GÖRE DÜZENLE -->
-                    <img src="sevde.jpg" alt="Sevde 26">
-                    <img src="sevde1.jpg" alt="Sevde 1">
-                    <img src="sevde2.jpg" alt="Sevde 2">
-                    <img src="sevde3.jpg" alt="Sevde 3">
-                    <img src="sevde4.jpg" alt="Sevde 4">
-                    <img src="sevde5.jpg" alt="Sevde 5">
-                    <img src="sevde6.jpg" alt="Sevde 6">
-                    <img src="sevde7.jpg" alt="Sevde 7">
-                    <img src="sevde8.jpg" alt="Sevde 8">
-                    <img src="sevde9.jpg" alt="Sevde 9">
-                    <img src="sevde10.jpg" alt="Sevde 10">
-                    <img src="sevde11.jpg" alt="Sevde 11">
-                    <img src="sevde12.jpg" alt="Sevde 12">
-                    <img src="sevde13.jpg" alt="Sevde 13">
-                    <img src="sevde14.jpg" alt="Sevde 14">
-                    <img src="sevde15.jpg" alt="Sevde 15">
-                    <img src="sevde16.jpg" alt="Sevde 16">
-                    <img src="sevde17.jpg" alt="Sevde 17">
-                    <img src="sevde18.jpg" alt="Sevde 18">
-                    <img src="sevde19.jpg" alt="Sevde 19">
-                    <img src="sevde20.jpg" alt="Sevde 20">
-                    <img src="sevde21.jpg" alt="Sevde 21">
-                    <img src="sevde22.jpg" alt="Sevde 22">
-                    <img src="sevde23.jpg" alt="Sevde 23">
-                    <img src="sevde24.jpg" alt="Sevde 24">
-                    <img src="sevde25.jpg" alt="Sevde 25">
-                   
-
-                    <!-- Aynı fotoğrafları tekrar ekliyoruz ki film şeridi boşluk bırakmadan dönsün -->
-                    <img src="sevde.jpg" alt="Sevde 26">
-                    <img src="sevde1.jpg" alt="Sevde 1 tekrar">
-                    <img src="sevde2.jpg" alt="Sevde 2 tekrar">
-                    <img src="sevde3.jpg" alt="Sevde 3 tekrar">
-                    <img src="sevde4.jpg" alt="Sevde 4 tekrar">
-                    <img src="sevde5.jpg" alt="Sevde 5 tekrar">
-                    <img src="sevde6.jpg" alt="Sevde 6 tekrar">
-                    <img src="sevde7.jpg" alt="Sevde 7 tekrar">
-                    <img src="sevde8.jpg" alt="Sevde 8 tekrar">
-                    <img src="sevde9.jpg" alt="Sevde 9 tekrar">
-                    <img src="sevde10.jpg" alt="Sevde 10 tekrar">
-                    <img src="sevde11.jpg" alt="Sevde 11 tekrar">
-                    <img src="sevde12.jpg" alt="Sevde 12 tekrar">
-                    <img src="sevde13.jpg" alt="Sevde 13 tekrar">
-                    <img src="sevde14.jpg" alt="Sevde 14 tekrar">
-                    <img src="sevde15.jpg" alt="Sevde 15 tekrar">
-                    <img src="sevde16.jpg" alt="Sevde 16 tekrar">
-                    <img src="sevde17.jpg" alt="Sevde 17 tekrar">
-                    <img src="sevde18.jpg" alt="Sevde 18 tekrar">
-                    <img src="sevde19.jpg" alt="Sevde 19 tekrar">
-                    <img src="sevde20.jpg" alt="Sevde 20 tekrar">
-                    <img src="sevde21.jpg" alt="Sevde 21 tekrar">
-                    <img src="sevde22.jpg" alt="Sevde 22 tekrar">
-                    <img src="sevde23.jpg" alt="Sevde 23 tekrar">
-                    <img src="sevde24.jpg" alt="Sevde 24 tekrar">
-                    <img src="sevde25.jpg" alt="Sevde 25 tekrar">
-                </div>
-            </div>
-        </div>
     </div>
 
-    <!-- Mesajlar -->
-    <div class="message">🌿 You are amazing.</div>
-    <div class="message">🍃 Today is your special day.</div>
-    <div class="message">💚 Keep shining, Sevde!</div>
-    <div class="message">🌱 You are loved.</div>
+    <!-- 🎞️ Çift Film Şeridi -->
+    <div class="double-strip" id="stripSection">
+        
+        <!-- Üst Şerit -->
+        <div class="film-track top-track">
+            <img src="sevde.jpg">
+            <img src="sevde1.jpg">
+            <img src="sevde2.jpg">
+            <img src="sevde3.jpg">
+            <img src="sevde4.jpg">
+            <img src="sevde5.jpg">
+            <img src="sevde6.jpg">
+            <img src="sevde7.jpg">
+            <img src="sevde8.jpg">
+            <img src="sevde9.jpg">
+            <img src="sevde10.jpg">
+            <img src="sevde11.jpg">
+            <img src="sevde12.jpg">
+        </div>
 
-    <div class="bottom-text">✨ Unutma Sevde: İstediğin her şeyi başarabilirsin. Işığın hep parlasın. ✨</div>
+        <!-- Mesajlar -->
+        <div class="center-messages">
+            <p class="msg">🌿 You are amazing.</p>
+            <p class="msg">✨ Today is your day.</p>
+            <p class="msg">💚 Keep shining, Sevde!</p>
+            <p class="msg">🍃 You are loved.</p>
+        </div>
 
-    <script>
-        // Scroll ipucu
-        document.addEventListener('DOMContentLoaded', () => {
-            const hint = document.querySelector('.scroll-hint');
+        <!-- Alt Şerit -->
+        <div class="film-track bottom-track">
+            <img src="sevde13.jpg">
+            <img src="sevde14.jpg">
+            <img src="sevde15.jpg">
+            <img src="sevde16.jpg">
+            <img src="sevde17.jpg">
+            <img src="sevde18.jpg">
+            <img src="sevde19.jpg">
+            <img src="sevde20.jpg">
+            <img src="sevde21.jpg">
+            <img src="sevde22.jpg">
+            <img src="sevde23.jpg">
+            <img src="sevde24.jpg">
+            <img src="sevde25.jpg">
+        </div>
 
-            if (hint) {
-                const updateHint = () => {
-                    if (window.scrollY > 10) {
-                        hint.style.opacity = '0';
-                    } else {
-                        hint.style.opacity = '1';
-                    }
-                };
+    </div>
 
-                window.addEventListener('scroll', updateHint);
-                setTimeout(() => { hint.style.opacity = '0'; }, 6000);
-            }
+    <div class="bottom-text">✨ İyi ki doğdun Sevde! ✨</div>
+
+<script>
+    // İsmi yazma animasyonu
+    let txt = "Sevde 💚";
+    let i = 0;
+    function typeName() {
+        if (i < txt.length) {
+            document.getElementById("name").innerHTML += txt[i];
+            i++;
+            setTimeout(typeName, 120);
+        }
+    }
+    setTimeout(typeName, 1600);
+
+    // Magic Başlat
+    function startMagic() {
+        document.getElementById("stripSection").style.display = "flex";
+    }
+
+    // Mesajları scroll ile göster
+    const msgs = document.querySelectorAll(".msg");
+
+    window.addEventListener("scroll", () => {
+        msgs.forEach(msg => {
+            const pos = msg.getBoundingClientRect().top;
+            if (pos < window.innerHeight - 100)
+                msg.classList.add("show");
         });
-
-        // İsim yazma
-        const nameText = "Sevde 💚";
-        let index = 0;
-        function typeName() {
-            if (index < nameText.length) {
-                document.getElementById("name").innerHTML += nameText[index];
-                index++;
-                setTimeout(typeName, 150);
-            }
-        }
-        setTimeout(typeName, 2000);
-
-        // Emoji yağmuru
-        const emojis = ["🌿", "🍃", "✨", "🪴"]; 
-        function startRain() {
-            setInterval(() => {
-                const drop = document.createElement("div");
-                drop.classList.add("drop");
-                drop.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-                drop.style.left = Math.random() * window.innerWidth + "px";
-                drop.style.fontSize = (20 + Math.random() * 25) + "px";
-                drop.style.animationDuration = (3 + Math.random() * 3) + "s";
-                document.body.appendChild(drop);
-                setTimeout(() => drop.remove(), 6000);
-            }, 200);
-        }
-
-        // Konfeti
-        function startConfetti() {
-            for (let i = 0; i < 80; i++) {
-                const c = document.createElement("div");
-                c.classList.add("confetti");
-                c.style.left = Math.random() * innerWidth + "px";
-                c.style.backgroundColor = ["#2e8b57", "#4caf50", "#8bc34a"][Math.floor(Math.random()*3)];
-                document.body.appendChild(c);
-                setTimeout(() => c.remove(), 2000);
-            }
-        }
-
-        // Mesajların scroll ile görünmesi
-        const msgs = document.querySelectorAll(".message");
-        window.addEventListener("scroll", () => {
-            msgs.forEach(msg => {
-                const pos = msg.getBoundingClientRect().top;
-                if (pos < window.innerHeight - 100) {
-                    msg.classList.add("show");
-                }
-            });
-        });
-
-        // Start Magic → emoji yağmuru + film şeridini göster
-        function startMagic() {
-            startRain();
-            const wrapper = document.getElementById("filmStripWrapper");
-            if (wrapper) {
-                wrapper.classList.add("show");
-            }
-        }
-    </script>
+    });
+</script>
 
 </body>
 </html>
